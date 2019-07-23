@@ -1,1 +1,240 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>You captured our cool QR code at DEFCON!!!!</title>
+<style>
+       @import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
+ #screen {
+     box-sizing: border-box;
+     width: 500px;
+     height: 500px;
+     image-rendering: pixelated;
+     image-rendering: -moz-crisp-edges;
+     image-rendering: crisp-edges;
+     background-image: url("screen.png?raw=1");
+     background-size: contain;
+     position: relative;
+ }
+
+ #text {
+     font-family: 'Press Start 2P', serif;
+     font-size: 20px;
+     position: absolute;
+     left: 40px;
+     top: 370px;
+     width: 380px;
+     line-height: 26px;
+     background-color: white;
+ }
+
+#heart {
+  display: none;
+  animation: float 2s ease-in-out infinite;
+  position: absolute;
+  top: 265px;
+  left: 165px;
+}
+
+.travel {
+  animation: float 2s ease-in-out infinite, travel-heart 8s !important;
+  top: 140px !important;
+  left: 360px !important;
+  display: block !important;
+}
+
+#me {
+  width: 160px;
+  top: 200px;
+  position: absolute;
+}
+
+ #pokemon {
+     width: 120px;
+     top: 10px;
+     position: absolute;
+     left: 0;
+     animation: slide 1.5s forwards;
+     animation-delay: 1s;
+     filter: brightness(0%)
+ }
+
+ @keyframes slide {
+     100% { left: 400px; }
+     75% { filter: brightness(0%) }
+     100% { filter: brightness(100%) }
+ }
+
+@keyframes float {
+	0% {
+		transform: translateY(0px);
+	}
+	50% {
+		transform: translateY(-20px);
+	}
+
+	100% {
+		transform: translateY(0px);
+	}
+}
+
+@keyframes travel-heart {
+  0% {
+    top: 265px;
+    left: 165px;
+  }
+  100% {
+    top: 140px;
+    left: 360px;
+  }
+}
+    </style>
+</head>
+<body translate="no">
+<div id="screen">
+<p id="text"></p>
+<img id="me" src="me.png?raw=1" />
+<img id="pokemon" src="plc.png?raw=1" />
+<span id="heart" class="">
+❤️
+</span>
+</div>
+<script id="rendered-js">
+      let effect = (char) => {
+  document.getElementById("text").innerHTML += char;
+}
+
+function typeWriter(text) {
+  let chars = text.split("")
+  chars.forEach((c, i) => setTimeout(effect.bind(null, c), i*90))
+}
+
+function clear() {
+  document.getElementById("text").innerHTML = "";
+}
+
+function blink() {
+  document.getElementById("text").style.display = "none";
+  setTimeout(() => {
+    document.getElementById("text").style.display = "block";
+  }, 400)
+}
+
+function shake(el) {
+  var i = 1;
+  var inter = setInterval(() => {
+    el.style.transform = "translateX("+i*4+"px)";
+     i = i * -1
+  }, 50)
+  setTimeout(() => clearInterval(inter), 1200);
+}
+
+function PLCPower() {
+  var plc = "plcbug.png?raw=1"
+  var oldSrc = document.getElementById("pokemon").src
+  document.getElementById("pokemon").src = plc
+  setTimeout(() =>
+    document.getElementById("pokemon").src = oldSrc,
+    6000)
+}
+
+function angryPLC() {
+  var plc = "plcinfected.png?raw=1"
+  var oldSrc = document.getElementById("pokemon").src
+  document.getElementById("pokemon").src = plc
+}
+
+function love() {
+  var heart = document.getElementById("heart")
+  heart.classList.add("travel")
+  setTimeout(() => {
+    heart.style.display = "none"
+  }, 8000)
+}
+
+window.onload = () => {
+  setTimeout(() => {
+    typeWriter("Wild PLC appeared!")
+  }, 500)
+  setTimeout(() => {
+    clear()
+    typeWriter("► Fight!")
+  }, 4500)
+  setTimeout(() => {
+    blink();
+  }, 7000)
+  setTimeout(() => {
+    clear()
+    typeWriter("Enemy PLC uses CALCULOS!")
+  }, 8000)
+  setTimeout(() => {
+    shake(document.getElementById("me"))
+  }, 10500)
+  setTimeout(() => {
+    clear()
+    typeWriter("► Try capture!")
+  }, 12500)
+  setTimeout(() => {
+    blink();
+  }, 15000)
+  setTimeout(() => {
+    clear()
+    typeWriter("Failed!")
+  }, 16000)
+  setTimeout(() => {
+    clear()
+    typeWriter("Enemy PLC uses BUG INJECT!")
+    PLCPower()
+  }, 18000)
+  setTimeout(() => {
+    shake(document.getElementById("me"))
+  }, 22000)
+  setTimeout(() => {
+    clear()
+    typeWriter("► Make enemy PLC Scan System!")
+  }, 24000)
+  setTimeout(() => {
+    blink();
+  }, 27000)
+  setTimeout(() => {
+    shake(document.getElementById("pokemon"))
+  }, 28000)
+  setTimeout(() => {
+    clear()
+    typeWriter("Enemy PLC becomes INFECTED!")
+    angryPLC()
+  }, 30000)
+  setTimeout(() => {
+    clear()
+    typeWriter("Enemy PLC uses QT JAVA!")
+  }, 34000)
+  setTimeout(() => {
+    shake(document.getElementById("me"))
+  }, 36000)
+  setTimeout(() => {
+    clear()
+    typeWriter("► Use NARI POWER ❤️!")
+    love()
+  }, 38000)
+  setTimeout(() => {
+    blink();
+  }, 39500)
+  setTimeout(() => {
+    shake(document.getElementById("pokemon"))
+  }, 41000)
+  setTimeout(() => {
+    clear()
+    typeWriter("► Try capture!")
+  }, 43000)
+  setTimeout(() => {
+    blink();
+  }, 45000)
+  setTimeout(() => {
+    clear()
+    typeWriter("Captured! ❤️")
+  }, 47500)
+}
+    </script>
+</body>
+</html>
